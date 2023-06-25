@@ -1,6 +1,6 @@
 "use client";
 import { addNotification } from "@/component/utilities/commonServices/CommonService";
-import { googleSignIn } from "@/component/utilities/firebase/firebase";
+import { googleSignIn } from "@/lib/firebase";
 import { blue, yellow } from "@ant-design/colors";
 import { ConfigProvider, Divider, theme } from "antd";
 import Image from "next/image";

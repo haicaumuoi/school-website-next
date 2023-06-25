@@ -7,6 +7,7 @@ import storage from "redux-persist/lib/storage";
 import persistedAuthReducer from "./slices/authSlice";
 import darkModeReducer from "./slices/darkModeSlice"; // Update the import statement
 import persistedSchoolSlice from "./slices/schoolSlice";
+import 'dotenv/config';
 
 const persistConfig = {
   key: "root",

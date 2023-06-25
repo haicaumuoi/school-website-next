@@ -1,22 +1,19 @@
-import { googleSignIn } from "@/component/utilities/firebase/firebase";
-import {
-  FacebookFilled,
-  InstagramOutlined,
-  LinkedinOutlined,
-  TwitterOutlined,
-  YoutubeOutlined,
-  createFromIconfontCN,
-} from "@ant-design/icons";
-import { Button } from "antd";
-import React from "react";
-import { useDispatch } from "react-redux";
+"use client";
+import { addNotification } from "@/component/utilities/commonServices/CommonService";
+import { googleSignIn } from "@/lib/firebase";
+import { store } from "@/redux/store";
 
 const Login = () => {
-  const dispatch = useDispatch();
-
   return (
     <div className="flex justify-center items-center h-screen">
-      <button className="w-full">Log in with Google</button>
+      <button
+        onClick={() => {
+          googleSignIn(store.dispatch);
+        }}
+        className="w-full"
+      >
+        Log in with Google
+      </button>
       <div className="my-4 text-center">OR</div>
       <button className="w-full">Log in with Facebook</button>
     </div>
