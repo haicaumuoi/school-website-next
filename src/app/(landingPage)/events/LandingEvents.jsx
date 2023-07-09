@@ -1,11 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Button, Typography, theme } from "antd";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 import SwipeableViews from "react-swipeable-views";
 import { events } from "../events/newsConst";
 import "./event.css";
+import { store } from "@/redux/store";
+import axios from "axios";
+import { getNews } from "@/redux/slices/newSlice";
 
 const { Title, Text, Paragraph } = Typography;
+
+// const staticData = await fetch(`https://alumniproject.azurewebsites.net/alumni/api/accessReqeuest`,
+// {
+//   pageIndex: 1,
+//   pageSize: 10,
+// },
+// {
+//   headers: {
+//     Authorization: `Bearer ${token}`,
+//   },
+// }, { cache: 'force-cache' })
 
 const LandingEvents = () => {
   const swipeableViewsRef = useRef(null);
@@ -14,6 +29,8 @@ const LandingEvents = () => {
 
   const { useToken } = theme;
   const { token } = useToken();
+
+ 
 
   const renderCarouselItems = () => {
     const totalItems = events.length;
@@ -60,6 +77,43 @@ const LandingEvents = () => {
 
     return carouselItems;
   };
+
+  const loginToken = store.getState().authReducer.token;
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         'https://alumniproject.azurewebsites.net/alumni/api/news',
+  //         {  pageNo: 1,
+  //           pageSize: 10, },
+  //           {
+  //             headers: {
+  //               Authorization: `Bearer ${loginToken}`,
+  //             },
+  //           }
+  //       );
+
+  //       if (response.status === 200) {
+  //         const jsonData = response.data;
+  //         setData(jsonData);
+  //       } else {
+  //         throw new Error('Request failed');
+  //       }
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  useEffect(() => {
+    store.dispatch(getNews(
+      { token: loginToken}
+    ));
+    console.log("news", store.getState().newReducer.news)
+  }, []);
   return (
     <>
       <div className="h-80 w-10/12 mt-14 mx-40">

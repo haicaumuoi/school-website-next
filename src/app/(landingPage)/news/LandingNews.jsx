@@ -1,10 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { grey, yellow } from "@ant-design/colors";
 import { Space, Typography, theme } from "antd";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { news } from "./newsConst";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
 import Image from "next/image";
+import { store } from "@/redux/store";
+import { getNews } from "@/redux/slices/newSlice";
 
 const { Text, Title } = Typography;
 
@@ -66,6 +69,8 @@ const LandingNews = () => {
 
   const { useToken } = theme;
   const { token } = useToken();
+
+
 
   return (
     <>

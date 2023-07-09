@@ -11,6 +11,8 @@ const { Header } = Layout;
 
 const HeaderComponent = () => {
   const isDarkMode = useSelector((state) => state.darkMode);
+  const user = useSelector((state) => state.user);
+  const validUser = user?.schoolId !== -1;
   const dispatch = useDispatch();
 
   const handleToggleDarkMode = () => {
@@ -38,7 +40,10 @@ const HeaderComponent = () => {
           Connect
         </Menu.Item>
         <Menu.Item key="5" className="font-black text-xl uppercase">
-          <Link href="/login">Login</Link>
+          {user ? (<Link href="/personal">Personal</Link>) : (
+            <Link href="/login">Login</Link>
+          )}
+    
         </Menu.Item>
       </Menu>
     </Header>
